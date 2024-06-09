@@ -3,8 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
-
-	"github.com/Rossoline/UAstore/cmd/pkg/handlers"
+	"uastore/pkg/handlers"
 )
 
 const portNumber = ":8080"
