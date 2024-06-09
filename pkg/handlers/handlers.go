@@ -2,8 +2,7 @@ package handlers
 
 import (
 	"net/http"
-
-	"github.com/Rossoline/UAstore/cmd/pkg/render"
+	"uastore/pkg/render"
 )
 
 // Home is the home page handler

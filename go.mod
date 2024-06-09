@@ -1,3 +1,3 @@
-module github.com/Rossoline/UAstore
+module uastore
 
 go 1.22.1
