@@ -1,13 +1,17 @@
 package handlers
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/Rossoline/UAstore/cmd/pkg/render"
+)
 
 // Home is the home page handler
 func Home(w http.ResponseWriter, r *http.Request) {
-	RenderTemplate(w, "home")
+	render.RenderTemplate(w, "home")
 }
 
 // About is about page handler
 func About(w http.ResponseWriter, r *http.Request) {
-	RenderTemplate(w, "about")
+	render.RenderTemplate(w, "about")
 }
