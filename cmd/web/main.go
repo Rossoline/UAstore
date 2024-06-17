@@ -12,6 +12,6 @@ func main() {
 	fmt.Print("Server started on port:" + portNumber)
 	http.HandleFunc("/", handlers.Home)
 	http.HandleFunc("/about", handlers.About)
-
+	http.HandleFunc("/contacts", handlers.Contacts)
 	_ = http.ListenAndServe(portNumber, nil)
 }
