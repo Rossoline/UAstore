@@ -23,4 +23,5 @@ func main() {
 	http.HandleFunc("/", handlers.Home)
 	http.HandleFunc("/about", handlers.About)
 	_ = http.ListenAndServe(portNumber, nil)
+	fmt.Println("All good")
 }
