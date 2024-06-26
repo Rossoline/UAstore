@@ -7,28 +7,30 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+	"uastore/pkg/config"
 )
 
 var functions = template.FuncMap{}
+var app *config.AppConfig
+
+func NewTemplates(a *config.AppConfig) {
+	app = a
+}
 
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
 	// get the template cache from the app config
-
-	tc, err := CreateTemplateCache()
-	if err != nil {
-		log.Fatal(err)
-	}
+	tc := app.TemplateCache
 
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal(err)
+		log.Fatal("Could not get template from templateCache")
 	}
 
 	buf := new(bytes.Buffer)
 
 	_ = t.Execute(buf, nil)
 
-	_, err = buf.WriteTo(w)
+	_, err := buf.WriteTo(w)
 	if err != nil {
 		fmt.Println("error writing template to browser", err)
 	}
