@@ -12,6 +12,7 @@ import (
 const portNumber = ":8080"
 
 func main() {
+	log.Println("Program started")
 	var app config.AppConfig
 
 	tc, err := render.CreateTemplateCache()
