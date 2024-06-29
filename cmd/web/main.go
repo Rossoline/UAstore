@@ -33,4 +33,5 @@ func main() {
 	_ = http.ListenAndServe(portNumber, nil)
 	fmt.Println("All good")
 	log.Println("Ended")
+	log.Println("Ended")
 }
