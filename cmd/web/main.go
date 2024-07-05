@@ -31,6 +31,4 @@ func main() {
 	http.HandleFunc("/", handlers.Repo.Home)
 	http.HandleFunc("/about", handlers.Repo.About)
 	_ = http.ListenAndServe(portNumber, nil)
-	fmt.Println("All good")
-	log.Println("Ended")
 }
