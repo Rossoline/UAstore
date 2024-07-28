@@ -21,6 +21,7 @@ func main() {
 	app.TemplateCache = tc
 	fmt.Print("Server started on port:" + portNumber)
 	http.HandleFunc("/", handlers.Home)
+	fmt.Println("Hello")
 	http.HandleFunc("/about", handlers.About)
 	_ = http.ListenAndServe(portNumber, nil)
 }
