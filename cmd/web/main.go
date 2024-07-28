@@ -12,8 +12,6 @@ import (
 const portNumber = ":8080"
 
 func main() {
-	log.Println("Program started")
-	log.Println("Started")
 	var app config.AppConfig
 
 	tc, err := render.CreateTemplateCache()
@@ -21,14 +19,9 @@ func main() {
 		log.Fatal("cannot create template cache")
 	}
 	app.TemplateCache = tc
-	app.UseCache = false
-
-	repo := handlers.NewRepo(&app)
-	handlers.NewHandlers(repo)
-
-	render.NewTemplates(&app)
 	fmt.Print("Server started on port:" + portNumber)
-	http.HandleFunc("/", handlers.Repo.Home)
-	http.HandleFunc("/about", handlers.Repo.About)
+	http.HandleFunc("/", handlers.Home)
+	fmt.Println("Hello")
+	http.HandleFunc("/about", handlers.About)
 	_ = http.ListenAndServe(portNumber, nil)
 }
