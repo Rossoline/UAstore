@@ -10,7 +10,6 @@ const portNumber = ":8080"
 // Home is the home page handler
 func Home(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "This is home page!")
-	fmt.Fprintf(w, "This is home page!")
 }
 
 // About is about page handler
