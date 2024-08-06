@@ -11,15 +11,20 @@ import (
 )
 
 var functions = template.FuncMap{}
+
 var app *config.AppConfig
 
+// NewTemplates sets the config for the template package
 func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
+// RenderTemplate renders a template
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
 	var tc map[string]*template.Template
+
 	if app.UseCache {
+		// get the template cache from the app config
 		tc = app.TemplateCache
 	} else {
 		tc, _ = CreateTemplateCache()
@@ -27,7 +32,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal("Could not get template from templateCache")
+		log.Fatal("Could not get template from template cache")
 	}
 
 	buf := new(bytes.Buffer)
