@@ -2,30 +2,38 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"uastore/pkg/config"
+	"uastore/pkg/handlers"
+	"uastore/pkg/render"
 )
 
 const portNumber = ":8080"
 
-// Home is the home page handler
-func Home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "This is home page!")
-}
-
-// About is about page handler
-func About(w http.ResponseWriter, r *http.Request) {
-	sum := addValue(5, 7)
-	fmt.Fprintf(w, "This is about page and sum is - %d!", sum)
-}
-
-func addValue(x, v int) int {
-	sum := x + v
-	return sum
-}
-
+// main is the main function
 func main() {
-	http.HandleFunc("/", Home)
-	http.HandleFunc("/about", About)
+	var app config.AppConfig
 
-	_ = http.ListenAndServe(portNumber, nil)
+	tc, err := render.CreateTemplateCache()
+	if err != nil {
+		log.Fatal("cannot create template cache")
+	}
+
+	app.TemplateCache = tc
+	app.UseCache = false
+
+	repo := handlers.NewRepo(&app)
+	handlers.NewHandlers(repo)
+	render.NewTemplates(&app)
+
+	fmt.Println(fmt.Sprintf("Staring application on port %s", portNumber))
+
+	srv := &http.Server{
+		Addr:    portNumber,
+		Handler: routes(&app),
+	}
+
+	err = srv.ListenAndServe()
+	log.Fatal(err)
 }
